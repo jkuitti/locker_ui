@@ -1,11 +1,17 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
+import RoomPage from "./pages/RoomPage";
+import AssignmentsPage from "./pages/AssignmentsPage";
+import HomePage from "./pages/HomePage";
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-    </Routes>
+    <div className="bg-[#f8fafc] min-h-screen">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/rooms/:roomid" element={<RoomPage />} />
+        <Route path="/assignments" element={<AssignmentsPage />} />
+      </Routes>
+    </div>
   );
 };
 
