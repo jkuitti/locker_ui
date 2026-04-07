@@ -6,7 +6,6 @@ type ModalType =
   | "ASSIGN_LOCKER"
   | "RETURN_LOCKER"
   | "EDIT_ROOM"
-  | "EDIT_LOCKER"
   | null;
 
 type ModalData = {

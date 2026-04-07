@@ -1,21 +1,21 @@
-import { DoorClosed } from "lucide-react";
-import AddNewRoom from "./AddNewRoom";
+import { Lock } from "lucide-react";
 
-const NoRooms = () => {
+const NoLockers = () => {
   return (
     <div className="box-border size-70 border-1 border-gray-300 text-center rounded-md flex items-center justify-center self-center w-full flex-col gap-2 bg-white">
-      <DoorClosed
+      <Lock
         style={{
           color: "gray",
           scale: "2",
           marginBottom: "10px",
         }}
       />
-      <h2 className="text-xl font-semibold"> Ei huoneita</h2>
-      <p className="text-gray-500">Aloita lisäämällä huone</p>
-      <AddNewRoom />
+      <h2 className="text-xl font-semibold"> Ei pukukaappeja</h2>
+      <p className="text-gray-500">
+        Aloita painamalla "Muokkaa" nappia lisätäksesi pukukaappeja
+      </p>
     </div>
   );
 };
 
-export default NoRooms;
+export default NoLockers;

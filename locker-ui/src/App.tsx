@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import RoomPage from "./pages/RoomPage";
 import AssignmentsPage from "./pages/AssignmentsPage";
 import HomePage from "./pages/HomePage";
+import ModalHost from "./components/modal/ModalHost";
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
         <Route path="/rooms/:roomid" element={<RoomPage />} />
         <Route path="/assignments" element={<AssignmentsPage />} />
       </Routes>
+      <ModalHost />
     </div>
   );
 };

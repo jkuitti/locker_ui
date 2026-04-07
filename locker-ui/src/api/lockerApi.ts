@@ -1,5 +1,10 @@
 import apiClient from "./client";
 
+const getLockersByRoomId = async (roomId: number) => {
+  const response = await apiClient.get(`/rooms/${roomId}/lockers`);
+  return response.data;
+};
+
 const getLockers = async () => {
   const response = await apiClient.get("/lockers");
   return response.data;
@@ -10,4 +15,4 @@ const createLocker = async () => {
   return response.data;
 };
 
-export { getLockers, createLocker };
+export { getLockers, createLocker, getLockersByRoomId };
