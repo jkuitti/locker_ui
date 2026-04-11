@@ -12,9 +12,9 @@ export const useCreateRoom = () => {
 
   return useMutation<Room, unknown, AddRoomData>({
     mutationFn: (newRoom: AddRoomData) => createRoom(newRoom),
-    onSuccess: () => {
+    onSuccess: async () => {
       // Invalidate rooms cache so lists refresh
-      queryClient.invalidateQueries({ queryKey: ["rooms"] });
+      await queryClient.invalidateQueries({ queryKey: ["rooms"] });
     },
   });
 };

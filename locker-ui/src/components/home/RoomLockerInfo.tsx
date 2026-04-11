@@ -11,13 +11,13 @@ const RoomLockerInfo = ({ roomId }: { roomId: number }) => {
           <p className="mb-10">{lockers.length} pukukaappia</p>
           <div className="flex justify-between mb-2">
             <p>Vapaana</p>
-            <p className="text-green-500">
+            <p className="text-green-600">
               {lockers.filter((l) => l.status === "FREE").length}{" "}
             </p>
           </div>
           <div className="flex justify-between">
             <p>Varattuna</p>
-            <p className="text-blue-500">
+            <p className="text-blue-600">
               {lockers.filter((l) => l.status === "OCCUPIED").length}{" "}
             </p>
           </div>

@@ -1,14 +1,33 @@
 import React from "react";
 import EditBar from "./EditBar";
+import LockerGrid from "./LockerGrid";
+import type { Locker } from "../../types/locker";
 
 const EditView = ({
-  setIsEditMode: _setIsEditMode,
+  roomId,
+  rows,
+  cols,
+  setRows,
+  setCols,
+  lockers,
 }: {
-  setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+  roomId: number;
+  rows: number;
+  cols: number;
+  setRows: React.Dispatch<React.SetStateAction<number>>;
+  setCols: React.Dispatch<React.SetStateAction<number>>;
+  lockers: Locker[];
 }) => {
   return (
-    <div>
-      <EditBar />
+    <div className="space-y-6">
+      <EditBar rows={rows} cols={cols} setRows={setRows} setCols={setCols} />
+      <LockerGrid
+        roomId={roomId}
+        rows={rows}
+        cols={cols}
+        lockers={lockers}
+        isEditMode
+      />
     </div>
   );
 };

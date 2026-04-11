@@ -2,25 +2,23 @@ import { ArrowLeft, SquarePen } from "lucide-react";
 import type { Room } from "../../types/room";
 import type { Locker } from "../../types/locker";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 const RoomHeader = ({
   room,
   lockers,
-  setIsEditMode,
+  isEditMode,
+  onToggleEditMode,
 }: {
   room: Room;
   lockers: Locker[];
-  setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+  isEditMode: boolean;
+  onToggleEditMode: () => void;
 }) => {
-  type EditButtonState = "muokkaa" | "tallenna";
   const navigate = useNavigate();
-  const [editButtonText, setEditButtonText] =
-    useState<EditButtonState>("muokkaa");
+  const editButtonText = isEditMode ? "tallenna" : "muokkaa";
 
   const handleEditClick = () => {
-    setIsEditMode((prev) => !prev);
-    setEditButtonText((prev) => (prev === "muokkaa" ? "tallenna" : "muokkaa"));
+    onToggleEditMode();
   };
 
   return (

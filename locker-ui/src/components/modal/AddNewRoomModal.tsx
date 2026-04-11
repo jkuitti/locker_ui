@@ -2,7 +2,6 @@ import { useUIStore } from "../../store/uiStore";
 import { useState } from "react";
 import BaseModal from "./BaseModal";
 import type { Gender } from "../../types/room";
-import { useNavigate } from "react-router-dom";
 import useCreateRoom from "../../hooks/mutations/useCreateRoom";
 
 type AddRoomData = {
@@ -35,12 +34,17 @@ const AddNewRoomModal = () => {
   return (
     <BaseModal title="Lisää uusi huone" onClose={closeModal}>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label className="mr-4 text-lg">
+        <div className="flex gap-2">
+          <label
+            className={`cursor-pointer rounded-lg border px-4 py-2 transition 
+        ${gender === "MEN" ? "bg-blue-400 text-white border-blue-500" : "bg-white text-gray-700"}
+      `}
+          >
             <input
               type="radio"
               name="gender"
               value="MEN"
+              className="hidden"
               checked={gender === "MEN"}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setGender(e.target.value as Gender)
@@ -48,11 +52,16 @@ const AddNewRoomModal = () => {
             />
             Miehet
           </label>
-          <label className="mr-4 p-2 text-lg">
+          <label
+            className={`cursor-pointer rounded-lg border px-4 py-2 transition 
+        ${gender === "WOMEN" ? "bg-red-400 text-white border-red-500" : "bg-white text-gray-700"}
+      `}
+          >
             <input
               type="radio"
               name="gender"
               value="WOMEN"
+              className="hidden"
               checked={gender === "WOMEN"}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setGender(e.target.value as Gender)
@@ -77,9 +86,9 @@ const AddNewRoomModal = () => {
           type="submit"
           disabled={!roomName.trim() || isSubmitting}
           className={
-            "mt-4 rounded px-4 py-2 text-white w-full " +
+            "mt-4 rounded px-4 py-2 text-white w-full brightness-50 " +
             (roomName.trim() && !isSubmitting
-              ? "bg-black hover:brightness-90"
+              ? "bg-black hover:brightness-100 cursor-pointer"
               : "bg-gray-500 opacity-60 cursor-not-allowed")
           }
         >
@@ -87,7 +96,7 @@ const AddNewRoomModal = () => {
         </button>
       </form>
       <button
-        className="mt-4 border-1 border-gray-300 rounded bg-white px-4 py-2 text-black hover:bg-gray-300 w-full"
+        className="mt-4 border-1 border-gray-300 rounded bg-white px-4 py-2 text-black hover:bg-gray-300 w-full cursor-pointer"
         onClick={closeModal}
       >
         Peruuta

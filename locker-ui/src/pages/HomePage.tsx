@@ -1,11 +1,9 @@
-import { useNavigate } from "react-router-dom";
 import { useRooms } from "../hooks/queries/useRooms";
 import NoRooms from "../components/home/NoRooms";
 import AddNewRoom from "../components/home/AddNewRoom";
 import RoomCard from "../components/home/RoomCard";
 
 const HomePage = () => {
-  const navigate = useNavigate();
   const { data, isLoading, error } = useRooms();
 
   if (isLoading) {

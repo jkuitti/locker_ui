@@ -2,9 +2,11 @@ import { useParams } from "react-router-dom";
 import { useRoomLockers } from "../hooks/queries/useRoomLockers";
 import { useRoomById } from "../hooks/queries/useRoomById";
 import RoomHeader from "../components/room/RoomHeader";
+import LockerGrid from "../components/room/LockerGrid";
 import NoLockers from "../components/room/NoLockers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EditView from "../components/room/EditView";
+import useUpdateRoomSize from "../hooks/mutations/useUpdateRoomSize";
 
 const RoomPage = () => {
   const { roomid } = useParams<{ roomid: string }>();
@@ -15,6 +17,16 @@ const RoomPage = () => {
     isLoading: isRoomLoading,
     error: roomError,
   } = useRoomById(Number(roomid));
+  const [editRows, setEditRows] = useState<number>(room?.gridRows ?? 1);
+  const [editCols, setEditCols] = useState<number>(room?.gridCols ?? 1);
+  const updateSizeMutation = useUpdateRoomSize();
+
+  useEffect(() => {
+    if (room) {
+      setEditRows(room.gridRows);
+      setEditCols(room.gridCols);
+    }
+  }, [room]);
 
   if (isLoading || isRoomLoading) {
     return <div>Loading...</div>;
@@ -24,25 +36,54 @@ const RoomPage = () => {
     return <div>Error loading lockers</div>;
   }
 
+  const handleToggleEditMode = () => {
+    if (isEditMode) {
+      updateSizeMutation.mutate(
+        {
+          roomId: room.id,
+          data: {
+            gridRows: editRows,
+            gridCols: editCols,
+          },
+        },
+        {
+          onSuccess: () => setIsEditMode(false),
+        },
+      );
+    } else {
+      setEditRows(room.gridRows);
+      setEditCols(room.gridCols);
+      setIsEditMode(true);
+    }
+  };
+
   return (
     <div className="container mx-auto p-4 flex justify-between flex-col">
-      <RoomHeader room={room} lockers={lockers} setIsEditMode={setIsEditMode} />
+      <RoomHeader
+        room={room}
+        lockers={lockers}
+        isEditMode={isEditMode}
+        onToggleEditMode={handleToggleEditMode}
+      />
       {isEditMode ? (
-        <EditView setIsEditMode={setIsEditMode} />
+        <EditView
+          roomId={room.id}
+          rows={editRows}
+          cols={editCols}
+          setRows={setEditRows}
+          setCols={setEditCols}
+          lockers={lockers}
+        />
       ) : lockers.length === 0 ? (
         <NoLockers />
       ) : (
-        <div className="grid grid-cols-4 gap-4">
-          {lockers.map((locker) => (
-            <div key={locker.id} className="border p-4 rounded">
-              <h2 className="text-lg font-bold">Locker {locker.id}</h2>
-              <p>
-                Status:{" "}
-                {locker.status === "OCCUPIED" ? "Occupied" : "Available"}
-              </p>
-            </div>
-          ))}
-        </div>
+        <LockerGrid
+          roomId={room.id}
+          rows={room.gridRows}
+          cols={room.gridCols}
+          lockers={lockers}
+          isEditMode={false}
+        />
       )}
     </div>
   );

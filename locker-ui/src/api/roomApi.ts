@@ -6,7 +6,7 @@ const getRooms = async (): Promise<Room[]> => {
   return response.data;
 };
 
-const createRoom = async (data: Omit<Room, "id">) => {
+const createRoom = async (data: Omit<Room, "id" | "gridRows" | "gridCols">) => {
   const response = await apiClient.post("/rooms", data);
   return response.data;
 };
@@ -22,7 +22,7 @@ const getRoomById = async (roomId: number): Promise<Room> => {
 
 const updateSize = async (
   roomId: number,
-  data: { grid_rows: number; grid_cols: number },
+  data: { gridRows: number; gridCols: number },
 ) => {
   const response = await apiClient.put(`/rooms/${roomId}`, data);
   return response.data;

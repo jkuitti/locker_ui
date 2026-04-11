@@ -1,3 +1,4 @@
+import type { NewAssignment } from "../types/assignment";
 import apiClient from "./client";
 
 const getAssignments = async () => {
@@ -5,8 +6,12 @@ const getAssignments = async () => {
   return response.data;
 };
 
-const createAssignment = async () => {
-  const response = await apiClient.post("/assignments");
+const createAssignment = async (lockerId: number, data: NewAssignment) => {
+  const response = await apiClient.post(
+    `/lockers/${lockerId}/assignment`,
+    data,
+  );
+
   return response.data;
 };
 

@@ -6,9 +6,12 @@ export const useDeleteRoom = () => {
 
   return useMutation<void, unknown, number>({
     mutationFn: (roomId: number) => deleteRoom(roomId),
-    onSuccess: () => {
+    onSuccess: async () => {
       // Invalidate rooms so lists refresh immediately
-      queryClient.invalidateQueries({ queryKey: ["rooms"] });
+      await queryClient.invalidateQueries({ queryKey: ["rooms"] });
+    },
+    onError: (error: any) => {
+      alert(error.response?.data?.message);
     },
   });
 };
