@@ -2,15 +2,21 @@ import type { Gender } from "./room";
 
 export type Assignment = {
   id: number;
-  assigned_at: string;
+  assignedAt: string;
   employeeLastName: string;
   employeeFirstName: string;
-  locker_number: string;
-  key_number: number;
-  room_gender: Gender;
+  lockerNumber: string;
+  keyNumber: number;
+  roomGender: Gender;
 };
 
 export type NewAssignment = Omit<
   Assignment,
-  "id" | "assigned_at" | "locker_number" | "key_number" | "room_gender"
+  "id" | "assignedAt" | "lockerNumber" | "keyNumber" | "roomGender"
 >;
+
+export type DeleteAssignment = {
+  id: number;
+  lockerId: number;
+  roomId: number;
+};

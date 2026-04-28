@@ -8,16 +8,16 @@ const RoomLockerInfo = ({ roomId }: { roomId: number }) => {
         <div>Loading lockers...</div>
       ) : lockers && lockers.length > 0 ? (
         <div>
-          <p className="mb-10">{lockers.length} pukukaappia</p>
+          <p className="mb-10 text-[#90a1b9]">{lockers.length} pukukaappia</p>
           <div className="flex justify-between mb-2">
-            <p>Vapaana</p>
-            <p className="text-green-600">
+            <p className="text-[#90a1b9]">Vapaana</p>
+            <p className="text-[#06df72] font-bold">
               {lockers.filter((l) => l.status === "FREE").length}{" "}
             </p>
           </div>
           <div className="flex justify-between">
-            <p>Varattuna</p>
-            <p className="text-blue-600">
+            <p className="text-[#90a1b9]">Varattuna</p>
+            <p className="text-[#51a2ff] font-bold">
               {lockers.filter((l) => l.status === "OCCUPIED").length}{" "}
             </p>
           </div>
@@ -32,7 +32,7 @@ const RoomLockerInfo = ({ roomId }: { roomId: number }) => {
               return (
                 <div>
                   <div
-                    className="w-full bg-gray-200 rounded h-2"
+                    className="w-full bg-[#314158] rounded h-2"
                     role="progressbar"
                     aria-valuemin={0}
                     aria-valuemax={100}
@@ -41,7 +41,7 @@ const RoomLockerInfo = ({ roomId }: { roomId: number }) => {
                   >
                     {occupied > 0 && (
                       <div
-                        className="bg-blue-600 h-2 rounded"
+                        className="bg-[#2b7fff] h-2 rounded"
                         style={{ width: `${pct}%` }}
                       />
                     )}

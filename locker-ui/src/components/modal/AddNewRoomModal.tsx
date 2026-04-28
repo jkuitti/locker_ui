@@ -34,7 +34,7 @@ const AddNewRoomModal = () => {
   return (
     <BaseModal title="Lisää uusi huone" onClose={closeModal}>
       <form onSubmit={handleSubmit}>
-        <div className="flex gap-2">
+        <div className="flex gap-2 mb-4">
           <label
             className={`cursor-pointer rounded-lg border px-4 py-2 transition 
         ${gender === "MEN" ? "bg-blue-400 text-white border-blue-500" : "bg-white text-gray-700"}
@@ -71,32 +71,35 @@ const AddNewRoomModal = () => {
           </label>
         </div>
 
-        <input
-          type="text"
-          placeholder="Room Name"
-          value={roomName}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setRoomName(e.target.value)
-          }
-          required
-          className="w-full border rounded px-3 py-2 mt-2"
-        />
+        <label className="text-white text-sm font-bold">
+          Huoneen nimi
+          <input
+            type="text"
+            placeholder="huoneen nimi"
+            value={roomName}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setRoomName(e.target.value)
+            }
+            required
+            className="w-full border-1 border-[#262626] focus:outline-none focus:ring text-lg rounded-lg px-3 py-2 mt-2 bg-[#121212] font-normal"
+          />
+        </label>
 
         <button
           type="submit"
           disabled={!roomName.trim() || isSubmitting}
           className={
-            "mt-4 rounded px-4 py-2 text-white w-full brightness-50 " +
+            "mt-4 rounded-lg px-4 py-2 text-black w-full brightness-90 " +
             (roomName.trim() && !isSubmitting
-              ? "bg-black hover:brightness-100 cursor-pointer"
-              : "bg-gray-500 opacity-60 cursor-not-allowed")
+              ? "bg-white hover:brightness-100 cursor-pointer"
+              : "bg-[#828282] opacity-90 cursor-not-allowed")
           }
         >
           {isSubmitting ? "Adding..." : "Lisää huone"}
         </button>
       </form>
       <button
-        className="mt-4 border-1 border-gray-300 rounded bg-white px-4 py-2 text-black hover:bg-gray-300 w-full cursor-pointer"
+        className="mt-4 border-1 border-[#262626] rounded-lg bg-[#121212] px-4 py-2 text-white hover:bg-[#1a1a1a] w-full cursor-pointer"
         onClick={closeModal}
       >
         Peruuta

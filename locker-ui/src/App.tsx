@@ -6,7 +6,7 @@ import ModalHost from "./components/modal/ModalHost";
 
 const App = () => {
   return (
-    <div className="bg-[#f8fafc] min-h-screen">
+    <div className="bg-[#0f172b] min-h-screen">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/rooms/:roomid" element={<RoomPage />} />

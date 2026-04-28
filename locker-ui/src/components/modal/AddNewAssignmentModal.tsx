@@ -7,7 +7,7 @@ import { KeyRound } from "lucide-react";
 const AddNewAssignmentModal = () => {
   const closeModal = useUIStore((state) => state.closeModal);
   const modalData = useUIStore((state) => state.modalData);
-  const locker = modalData?.locker;
+  const locker = modalData?.locker ?? modalData?.listRow;
   const mutation = useAssignLocker(locker?.id ?? 0, locker?.roomId ?? 0);
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
@@ -34,16 +34,23 @@ const AddNewAssignmentModal = () => {
 
   return (
     <BaseModal title="Varaa pukukaappi" onClose={closeModal}>
-      <div className="flex items-center">
-        <p className="text-lg text-gray-700"># {locker?.lockerNumber}</p>
+      <div className="flex items-center bg-[#0f172b] self-center py-4 px-12 rounded-xl">
+        <div className="flex gap-2">
+          <p className="text-lg text-[#90a1b9]"># </p>
+          <p className="text-lg text-white">{locker?.lockerNumber}</p>
+        </div>
+
         <KeyRound
           style={{
-            color: "blue",
-            scale: "0.8",
+            color: "#155dfc",
+            width: 35,
+            height: 35,
             marginLeft: 10,
+
+            padding: 8,
           }}
         />
-        <p className="text-gray-700">{locker?.keyNumber}</p>
+        <p className="text-white">{locker?.keyNumber}</p>
       </div>
 
       <form
@@ -55,30 +62,32 @@ const AddNewAssignmentModal = () => {
       >
         <div className="flex flex-col mt-8 gap-6">
           <div>
-            <label>Etunimi</label>
+            <label className="text-white font-medium">Etunimi</label>
             <input
               type="text"
+              color="#a1a1a1"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               placeholder="etunimi"
               required
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow bg-[#121212] border-[#262626] appearance-none border rounded mt-2 w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div className="flex flex-col">
-            <label>Sukunimi</label>
+            <label className="text-white font-medium">Sukunimi</label>
             <input
               type="text"
+              color="#a1a1a1"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               placeholder="sukunimi"
               required
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow bg-[#121212] border-[#262626] appearance-none border mt-2 rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div>
             <button
-              className="bg-white hover:bg-gray-400 font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mr-2 border border-gray-400 cursor-pointer"
+              className="bg-[#121212] hover:bg-[#1c1c1c] text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mr-2 border border-[#262626] cursor-pointer"
               type="button"
               onClick={closeModal}
             >
@@ -88,10 +97,10 @@ const AddNewAssignmentModal = () => {
               type="submit"
               disabled={isSubmitting}
               className={
-                "text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline brightness-50 " +
+                "text-black font-medium py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline  " +
                 (firstName.trim() && lastName.trim() && !isSubmitting
-                  ? " bg-black hover:brightness-100 cursor-pointer"
-                  : " bg-gray-700 opacity-60 cursor-not-allowed")
+                  ? " bg-white hover:bg-[#d9d9d9] cursor-pointer"
+                  : " bg-[#828282] opacity-60 cursor-not-allowed")
               }
             >
               {isSubmitting ? "Tallennetaan..." : "Tallenna"}

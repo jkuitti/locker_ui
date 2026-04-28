@@ -16,23 +16,25 @@ const RoomCard = ({ room }: { room: Room }) => {
 
   return (
     <div
-      className="group bg-white w-150 rounded-lg shadow-md p-4 flex justify-between h-100 flex-col cursor-pointer hover:shadow-lg transition-shadow"
+      className="group bg-[#1d293d] w-120 rounded-lg shadow-md p-4 flex justify-between h-80 flex-col cursor-pointer hover:shadow-lg transition-shadow"
       onClick={handleRoomSelection}
     >
       <div>
         <div className="flex justify-between gap-4">
-          <h3 className="text-lg font-semibold mb-2">{room.name}</h3>
+          <h3 className="text-lg font-semibold mb-2 text-[#f1f5f9]">
+            {room.name}
+          </h3>
           {room.gender === "MEN" ? (
             <Mars
               style={{
-                color: "gray",
+                color: "#90a1b9",
                 scale: "1",
               }}
             />
           ) : (
             <Venus
               style={{
-                color: "gray",
+                color: "#90a1b9",
                 scale: "1",
               }}
             />
@@ -44,7 +46,7 @@ const RoomCard = ({ room }: { room: Room }) => {
       <div>
         <p
           className={
-            "text-white bg-red-500 text-sm mt-2 rounded py-1 px-2 text-center cursor-pointer hover:bg-red-600 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-150 " +
+            "text-white bg-[#5a1f28] text-sm mt-2 rounded py-1 px-2 text-center cursor-pointer hover:bg-red-600 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-150 " +
             (isDeleting ? "opacity-70 cursor-not-allowed" : "")
           }
           onClick={(e) => {

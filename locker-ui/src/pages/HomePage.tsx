@@ -18,16 +18,16 @@ const HomePage = () => {
     <div className="container mx-auto p-4 flex justify-between flex-col">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold mb-2">
-            Pukuhuoneiden hallinta järjestelmä
+          <h1 className="text-3xl font-bold mb-2 text-[#f1f5f9]">
+            Pukuhuoneiden hallintajärjestelmä
           </h1>
-          <p className="text-gray-500 mb-7">
+          <p className="text-[#90a1b9] mb-7">
             Valitse huone ja hallitse pukukaappeja
           </p>
         </div>
         <AddNewRoom />
       </div>
-      <div className="flex gap-4">
+      <div className="flex gap-6">
         {!data || data.length === 0 ? (
           <NoRooms />
         ) : (

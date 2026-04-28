@@ -44,15 +44,19 @@ const LockerGrid = ({
     const isEmpty = !locker;
     const canAdd = isEditMode && isEmpty;
     const baseClasses =
-      "group relative aspect-square flex flex-col items-center justify-center gap-2 rounded-2xl p-4 text-centertransition-colors duration-200";
+      "group relative aspect-square flex flex-col items-center justify-center gap-2 rounded-2xl p-4 text-center transition-colors duration-200";
     const emptyClasses = isEditMode
-      ? "border border-dashed border-gray-400 bg-white cursor-pointer hover:bg-slate-50"
-      : "border border-gray-200 bg-white";
+      ? "border border-dashed border-2 border-[#45556c] bg-[#1d293d] cursor-pointer hover:bg-[#314158]"
+      : "border border-dashed border-2 bg-[#1d293d] border-[#45556c]";
     const lockerClasses = locker
       ? isFree
-        ? "border border-solid border-green-400  text-green-900  bg-green-200 cursor-pointer"
+        ? isEditMode
+          ? " border-solid border-[#00a63e] border-2  bg-[#183638] cursor-pointer hover:border-[#ec0004]"
+          : " border-solid border-[#00a63e] border-2  bg-[#183638] cursor-pointer"
         : isOccupied
-          ? "border border-solid border-blue-400 bg-blue-200 text-blue-900 cursor-pointer"
+          ? isEditMode
+            ? "border border-solid border-[#155dfc] bg-[#1c2e56] border-2 text-blue-900 cursor-pointer hover:border-[#ec0004]"
+            : "border border-solid border-[#155dfc] bg-[#1c2e56] border-2 text-blue-900 cursor-pointer"
           : "border border-solid border-gray-300 bg-gray-100 text-gray-600"
       : emptyClasses;
 
@@ -65,15 +69,16 @@ const LockerGrid = ({
           } else if (locker && !isEditMode && locker.status === "FREE") {
             openModal("ASSIGN_LOCKER", { locker: locker });
           } else if (locker && !isEditMode && locker.status === "OCCUPIED") {
-            openModal("RETURN_LOCKER");
+            openModal("RETURN_LOCKER", { locker: locker });
           }
         }}
-        className={`${baseClasses} ${locker ? lockerClasses : emptyClasses}`}
+        className={`${baseClasses} ${locker ? lockerClasses : emptyClasses}
+        }`}
       >
         {locker ? (
           isEditMode ? (
             <>
-              <div className="text-sm font-bold group-hover:opacity-0">
+              <div className="text-sm font-bold group-hover:opacity-0 text-[#cad5e2]">
                 {locker.lockerNumber}
               </div>
               <div
@@ -81,16 +86,18 @@ const LockerGrid = ({
                   e.stopPropagation();
                   handeleLockerClick(locker);
                 }}
-                className="absolute flex items-center justify-center inset-0 opacity-0 group-hover:opacity-100 hover:bg-red-500 rounded-2xl cursor-pointer"
+                className="bg-[#3b2433] absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 rounded-2xl cursor-pointer"
               >
-                <p className="text-lg font-bold">X</p>
+                <p className="text-lg font-bold text-[#e4020f]">X</p>
               </div>
             </>
           ) : (
-            <div className="text-sm font-bold">{locker.lockerNumber}</div>
+            <div className="text-sm font-bold text-[#cad5e2]">
+              {locker.lockerNumber}
+            </div>
           )
         ) : isEditMode ? (
-          <div className="text-3xl text-gray-500">+</div>
+          <div className="text-3xl text-[#cad5e2]">+</div>
         ) : (
           <div className="h-8" />
         )}

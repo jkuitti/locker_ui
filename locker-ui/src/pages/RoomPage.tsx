@@ -7,10 +7,12 @@ import NoLockers from "../components/room/NoLockers";
 import { useEffect, useState } from "react";
 import EditView from "../components/room/EditView";
 import useUpdateRoomSize from "../hooks/mutations/useUpdateRoomSize";
+import LockerList from "../components/room/LockerList";
 
 const RoomPage = () => {
   const { roomid } = useParams<{ roomid: string }>();
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isGridView, setIsGridView] = useState(true);
   const { data: lockers, isLoading, error } = useRoomLockers(Number(roomid));
   const {
     data: room,
@@ -57,12 +59,18 @@ const RoomPage = () => {
     }
   };
 
+  const handleToggleView = () => {
+    setIsGridView((prev) => !prev);
+  };
+
   return (
-    <div className="container mx-auto p-4 flex justify-between flex-col">
+    <div className="container mx-auto p-4 flex justify-between flex-col ">
       <RoomHeader
         room={room}
         lockers={lockers}
         isEditMode={isEditMode}
+        isGridView={isGridView}
+        onToggleView={handleToggleView}
         onToggleEditMode={handleToggleEditMode}
       />
       {isEditMode ? (
@@ -76,14 +84,20 @@ const RoomPage = () => {
         />
       ) : lockers.length === 0 ? (
         <NoLockers />
+      ) : isGridView ? (
+        <div className="bg-[#1d293d] p-6 rounded-2xl">
+          <LockerGrid
+            roomId={room.id}
+            rows={room.gridRows}
+            cols={room.gridCols}
+            lockers={lockers}
+            isEditMode={false}
+          />
+        </div>
       ) : (
-        <LockerGrid
-          roomId={room.id}
-          rows={room.gridRows}
-          cols={room.gridCols}
-          lockers={lockers}
-          isEditMode={false}
-        />
+        <div className="bg-[#1d293d] p-6 rounded-2xl">
+          <LockerList roomId={room.id} />
+        </div>
       )}
     </div>
   );

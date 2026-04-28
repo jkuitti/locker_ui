@@ -37,27 +37,29 @@ const AddNewLockerModal = () => {
         }}
       >
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-white text-sm font-bold mb-2">
             Kaapin numero
           </label>
           <input
             type="text"
+            color="#a1a1a1"
             value={lockerNumber}
             onChange={(e) => setLockerNumber(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="bg-[#121212] border-[#262626] shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring"
             placeholder="Kaapin numero"
             required
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-white text-sm font-bold mb-2">
             Avaimen numero
           </label>
           <input
             type="text"
+            color="#a1a1a1"
             value={keyNumber}
             onChange={(e) => setKeyNumber(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="bg-[#121212] border-[#262626] shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring"
             placeholder="Avaimen numero"
             required
           />
@@ -66,7 +68,7 @@ const AddNewLockerModal = () => {
           <button
             type="button"
             onClick={closeModal}
-            className="bg-white hover:bg-gray-400 font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mr-2 border border-gray-400 cursor-pointer"
+            className="text-white bg-black font-medium py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mr-2 border border-[#262626] cursor-pointer"
           >
             Peruuta
           </button>
@@ -74,10 +76,10 @@ const AddNewLockerModal = () => {
             type="submit"
             disabled={isSubmitting}
             className={
-              "text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline brightness-50" +
+              "text-black font-medium py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline brightness-90" +
               (lockerNumber.trim() && keyNumber.trim() && !isSubmitting
-                ? " bg-black hover:brightness-100 cursor-pointer "
-                : " bg-gray-700 opacity-60 cursor-not-allowed")
+                ? " bg-white hover:brightness-100 cursor-pointer "
+                : " bg-[#828282] cursor-not-allowed")
             }
           >
             {isSubmitting ? "Tallennetaan..." : "Tallenna"}

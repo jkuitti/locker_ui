@@ -21,13 +21,15 @@ const EditView = ({
   return (
     <div className="space-y-6">
       <EditBar rows={rows} cols={cols} setRows={setRows} setCols={setCols} />
-      <LockerGrid
-        roomId={roomId}
-        rows={rows}
-        cols={cols}
-        lockers={lockers}
-        isEditMode
-      />
+      <div className="bg-[#1d293d] p-6 rounded-2xl">
+        <LockerGrid
+          roomId={roomId}
+          rows={rows}
+          cols={cols}
+          lockers={lockers}
+          isEditMode
+        />
+      </div>
     </div>
   );
 };

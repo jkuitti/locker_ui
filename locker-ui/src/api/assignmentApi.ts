@@ -15,4 +15,27 @@ const createAssignment = async (lockerId: number, data: NewAssignment) => {
   return response.data;
 };
 
-export { getAssignments, createAssignment };
+const getAssignmentByLockerId = async (lockerId: number) => {
+  const response = await apiClient.get(`/lockers/${lockerId}/assignment`);
+
+  return response.data;
+};
+
+const deleteAssignment = async (assignmentId: number, lockerId: number) => {
+  await apiClient.delete(`/assignments/${assignmentId}`, {
+    data: { lockerId: lockerId },
+  });
+};
+
+const getRoomAssignments = async (roomId: number) => {
+  const response = await apiClient.get(`/rooms/${roomId}/assignments`);
+  return response.data;
+};
+
+export {
+  getAssignments,
+  createAssignment,
+  deleteAssignment,
+  getAssignmentByLockerId,
+  getRoomAssignments,
+};

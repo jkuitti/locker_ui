@@ -7,14 +7,14 @@ const AddNewRoom = () => {
   return (
     <div
       onClick={() => openModal("ADD_ROOM")}
-      className="flex items-center justify-center bg-black rounded-md self-center px-4 py-2 cursor-pointer"
+      className="flex items-center justify-center bg-white rounded-md self-center px-4 py-2 cursor-pointer"
     >
       <Plus
         style={{
-          color: "white",
+          color: "#171717",
         }}
       />
-      <p className="text-white mx-1 text-sm">Lisää huone</p>
+      <p className="text-[#171717] mx-1 text-sm">Lisää huone</p>
     </div>
   );
 };

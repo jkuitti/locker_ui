@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import type { Locker } from "../types/locker";
+import type { LockerListRow } from "../types/lockerListRow";
 
 type ModalType =
   | "ADD_ROOM"
@@ -15,6 +16,7 @@ type ModalData = {
   gridX?: number;
   gridY?: number;
   locker?: Locker;
+  listRow?: LockerListRow;
 };
 
 type UIState = {
